@@ -14,10 +14,10 @@ class PostController extends Controller
     // Validation Rules
 
     protected $validationRules = [
-        // 'author' => 'required|min:5|max:150',
+        'user_id' => 'required|min:5|max:150',
         'title' =>  'required|min:5|max:150',
         'post_img' => 'active_url',
-        'post_content' => 'required|min:50|max:255',
+        'post_content' => 'required|min:50',
         'post_date' => 'required||date'
     ];
     /**

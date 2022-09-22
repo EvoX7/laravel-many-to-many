@@ -11,8 +11,9 @@
 </div>
 {{-- Author --}}
 <div class="mb-3">
-    <label for="title" class="form-label">Author</label>
-    <input type="text" class="form-control" name="user_id" id="user_id" value="{{ old('user->name', $post->user->name) }}"
+    <label for="user" class="form-label">Author</label>
+    <input type="text" class="form-control" name="user_id" id="user"
+    value="{{ old('user_id', $post->user->name) }}"
         required>
     @error('user_id')
         <div class="alert alert-danger">
