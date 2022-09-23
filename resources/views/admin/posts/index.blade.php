@@ -35,7 +35,7 @@
 
                         @forelse ($posts as $post)
                             <tr>
-                                <td class="font-weight-bold">{{ $post->id }}</td>
+                                <td>{{ $post->id }}</td>
                                 <td class="font-weight-bold">{{ $post->user->name }}</td>
                                 <td class="font-weight-bold"><a class="font-weight-bold"
                                         href="{{ route('admin.posts.show', $post->id) }}">{{ $post->title }}</a>
@@ -44,10 +44,11 @@
                                         @if (isset($post->category)) style="background-color: {{ $post->category->color }} "> {{ $post->category->name }} 
                                         @else 
                                         style="background-color: grey"
-                                        Unlisted @endif
+                                        Unlisted 
+                                        @endif
                                         </span>
                                 </td>
-                                <td>{{ $post->tag_id}}</td>
+                                <td class="text-center">{{ $post->tag_id }}</td>
                                 <td>{{ $post->post_date }}</td>
                                 <td>
                                     <a class="btn btn-primary font-weight-bold"
