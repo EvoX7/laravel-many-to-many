@@ -31,7 +31,7 @@
                         @forelse ($tags as $tag)
                             <tr>
                                 <td class="fw-bold">{{ $tag->id }}</td>
-                                <td class="font-weight-bold">{{ $tag->name }}</td>
+                                <td class="font-weight-bold">#{{ $tag->name }}</td>
                                 <td>
                                     <a class="btn btn-info font-weight-bold"
                                         href="{{ route('admin.tags.show', $tag->id) }}">View</a>
