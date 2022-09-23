@@ -26,6 +26,7 @@
                         <th scope="col">Author</th>
                         <th scope="col">Title</th>
                         <th scope="col">Category</th>
+                        <th scope="col">Tags</th>
                         <th scope="col">Date</th>
 
 
@@ -34,9 +35,9 @@
 
                         @forelse ($posts as $post)
                             <tr>
-                                <td class="fw-bold">{{ $post->id }}</td>
+                                <td class="font-weight-bold">{{ $post->id }}</td>
                                 <td class="font-weight-bold">{{ $post->user->name }}</td>
-                                <td class="fw-bold"><a class="font-weight-bold"
+                                <td class="font-weight-bold"><a class="font-weight-bold"
                                         href="{{ route('admin.posts.show', $post->id) }}">{{ $post->title }}</a>
                                 </td>
                                 <td> <span class="badge badge-pill text-light w-75"
@@ -45,8 +46,8 @@
                                         style="background-color: grey"
                                         Unlisted @endif
                                         </span>
-
                                 </td>
+                                <td>{{ $post->tag_id}}</td>
                                 <td>{{ $post->post_date }}</td>
                                 <td>
                                     <a class="btn btn-primary font-weight-bold"

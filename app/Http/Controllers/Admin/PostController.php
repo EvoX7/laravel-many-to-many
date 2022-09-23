@@ -30,7 +30,7 @@ class PostController extends Controller
     {
 
         $posts = Post::where('user_id', Auth::id())->get();
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', compact('posts',));
     }
 
     /**
@@ -121,6 +121,7 @@ class PostController extends Controller
         $post->post_date = $data['post_date'];
 
         $post->save();
+        $post->tags()->sync($data['tags']);
 
         return redirect()->route('admin.posts.show', $post->id)->with('created', $post->title);
     }

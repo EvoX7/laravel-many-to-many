@@ -47,38 +47,40 @@
 
     @foreach ($tags as $tag)
         <div class="form-check">
+            
             <input type="checkbox" name="tags[]" type="checkbox" id="tags" class="form-check-input"
-                value="{{ $tag->id }}">
+                value="{{ $tag->id }}" {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+
             <label for="tags" class="form-check-label">{{ $tag->name }}</label>
-        </div>
-    @endforeach
-    @error('tags')
-        <div class="alert alert-danger">
-            {{ $message }}
-        </div>
-    @enderror
+    </div>
+@endforeach
+@error('tags')
+    <div class="alert alert-danger">
+        {{ $message }}
+    </div>
+@enderror
 </div>
 {{-- Post date --}}
 <div class="mb-3">
-    <label for="post_date" class="form-label">Post date</label>
-    <input type="date" class="form-control" name="post_date" id="post_date"
-        value="{{ old('post_date', $post->post_date) }}" required>
-    @error('post_date')
-        <div class="alert alert-danger">
-            {{ $message }}
-        </div>
-    @enderror
+<label for="post_date" class="form-label">Post date</label>
+<input type="date" class="form-control" name="post_date" id="post_date"
+    value="{{ old('post_date', $post->post_date) }}" required>
+@error('post_date')
+    <div class="alert alert-danger">
+        {{ $message }}
+    </div>
+@enderror
 </div>
 
 {{-- Post content --}}
 <div class="mb-3">
-    <label for="post_content" class="form-label">Post Content</label>
-    <textarea class="form-control" name="post_content"id="post_content" rows="6" aria-describedby="Post_contentHelp"
-        required>{{ old('post_content', $post->post_content) }}</textarea>
-    <div id="Post_contentHelp" class="form-text">Please insert your post.</div>
-    @error('post_content')
-        <div class="alert alert-danger">
-            {{ $message }}
-        </div>
-    @enderror
+<label for="post_content" class="form-label">Post Content</label>
+<textarea class="form-control" name="post_content"id="post_content" rows="6" aria-describedby="Post_contentHelp"
+    required>{{ old('post_content', $post->post_content) }}</textarea>
+<div id="Post_contentHelp" class="form-text">Please insert your post.</div>
+@error('post_content')
+    <div class="alert alert-danger">
+        {{ $message }}
+    </div>
+@enderror
 </div>

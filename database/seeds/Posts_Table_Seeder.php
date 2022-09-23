@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
@@ -18,11 +19,13 @@ class Posts_Table_Seeder extends Seeder
 
         $allUser = User::all();
         $categories = Category::all();
+        $tags = Tag::all();
 
         for ($i = 0; $i < 200; $i++) {
             $newPost = new Post();
             $newPost->user_id = $faker->randomElement($allUser)->id;
             $newPost->category_id = $faker->randomElement($categories)->id;
+            $newPost->tag_id = $faker->randomElement($tags)->id;
             $newPost->title = $faker->realText(40);
             $newPost->post_date = $faker->dateTime();
             $newPost->post_img = $faker->imageUrl();
