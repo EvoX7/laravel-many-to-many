@@ -21,7 +21,6 @@
     @enderror
 </div>
 
-
 {{-- Post date --}}
 <div class="mb-3">
     <label for="post_date" class="form-label">Post date</label>
@@ -33,6 +32,7 @@
         </div>
     @enderror
 </div>
+
 {{-- Post content --}}
 <div class="mb-3">
     <label for="post_content" class="form-label">Post Content</label>

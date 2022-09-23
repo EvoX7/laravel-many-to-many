@@ -65,9 +65,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
 
-        
         $category = Category::all();
-        return view('admin.categories.edit', compact('id'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -81,7 +80,7 @@ class CategoryController extends Controller
     {
 
         $category = Category::findOrFail($id);
-        return redirect()->route('admin.categories.show', compact('id'));
+        return redirect()->route('admin.categories.show', compact('category'));
     }
 
     /**

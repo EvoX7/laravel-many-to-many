@@ -5,6 +5,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
+
                 <h1 class="mt-3 mb-5 text-center">List category</h1>
 
                 @if (session('delete'))
@@ -23,6 +24,7 @@
                     <thead>
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Slug</th>
                         <th scope="col">Color</th>
 
 
@@ -34,7 +36,10 @@
                             <tr>
                                 <td class="fw-bold">{{ $category->id }}</td>
                                 <td class="font-weight-bold">{{ $category->name }}</td>
-                                <td> <span class="badge badge-pill text-light w-50"
+                                <td class="fw-bold"><a class="font-weight-bold"
+                                        href="{{ route('admin.categories.show', $category->id) }}">{{ $category->slug }}</a>
+                                </td>
+                                <td> <span class="badge badge-pill text-light w-75"
                                         style="background-color: {{ $category->color }} ">
                                         {{ $category->name }}
                                     </span>

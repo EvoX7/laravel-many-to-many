@@ -1,7 +1,7 @@
 {{-- Title --}}
 <div class="mb-3">
     <label for="title" class="form-label">Name</label>
-    <input type="text" class="form-control" name="title" id="title" value="{{ old('title', $post->title) }}"
+    <input type="text" class="form-control" name="title" id="title" value="{{ old('name', $category->name) }}"
         required>
     @error('name')
         <div class="alert alert-danger">
@@ -21,43 +21,7 @@
     @enderror
 </div>
 
-{{-- Category --}}
-<div class="mb-3">
-    <label for="category" class="form-label">Choose category</label>
-    <select type="text" class="form-control" name="category" id="category">
-        <option value="">Unlisted</option>
-        @foreach ($categories as $category)
-            <option value="{{ old('category', $category->id) }}"
-                @isset($post->category)
-                {{ $category->id === $post->category->id ? 'selected' : '' }}
-                @endisset>
-                {{ $category->name }}
-            </option>
-        @endforeach
-    </select>
-    @error('category')
-        <div class="alert alert-danger">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
 
-{{-- Tags --}}
-<div class="mb-3">
-
-    @foreach ($tags as $tag)
-        <div class="form-check">
-            <input type="checkbox" name="tags[]" type="checkbox" id="tags" class="form-check-input"
-                value="{{ $tag->id }}">
-            <label for="tags" class="form-check-label">{{ $tag->name }}</label>
-        </div>
-    @endforeach
-    @error('tags')
-        <div class="alert alert-danger">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
 {{-- Post date --}}
 <div class="mb-3">
     <label for="post_date" class="form-label">Post date</label>
@@ -69,7 +33,6 @@
         </div>
     @enderror
 </div>
-
 {{-- Post content --}}
 <div class="mb-3">
     <label for="post_content" class="form-label">Post Content</label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,7 +42,9 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        return view('admin.posts.create', ['post' => $post, 'categories' => $categories]);
+        $tags = Tag::all();
+        
+        return view('admin.posts.create', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -58,13 +61,14 @@ class PostController extends Controller
 
 
         $post = new Post();
-        $post->user_id = $data['user_id'];
+        $post->user_id = Auth::user()->id;
         $post->title = $data['title'];
         $post->post_img = $data['post_img'];
         $post->post_content = $data['post_content'];
         $post->post_date = $data['post_date'];
-
+        $post->fill($data);
         $post->save();
+        $post->tags()->sync($data['tags']);
 
         return redirect()->route('admin.posts.index')->with('created', $post->title);
     }
@@ -91,8 +95,9 @@ class PostController extends Controller
     {
         $post = Post::findOrfail($id);
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -106,7 +111,7 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        // $validated = $request->validate($this->validationRules);
+        $validated = $request->validate($this->validationRules);
         $post = Post::findOrfail($id);
 
         $post->user_id = Auth::user()->id;

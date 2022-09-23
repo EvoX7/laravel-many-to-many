@@ -43,8 +43,7 @@
                                         @if (isset($post->category)) style="background-color: {{ $post->category->color }} "> {{ $post->category->name }} 
                                         @else 
                                         style="background-color: grey"
-                                        Unlisted
-                                        @endif
+                                        Unlisted @endif
                                         </span>
 
                                 </td>
