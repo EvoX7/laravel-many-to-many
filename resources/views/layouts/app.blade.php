@@ -25,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand font-weight-bold " href="{{ route('admin.home') }}"> Admin Panel
+                <a class="navbar-brand font-weight-bold " href="{{ route('admin.home') }}"> BoolPress
                 </a>
                 <a class="navbar-brand btn btn-info text-white" href="{{ route('admin.posts.index') }}">
                    Posts</a>

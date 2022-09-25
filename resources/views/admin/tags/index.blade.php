@@ -8,9 +8,9 @@
 
                 <h1 class="mt-3 mb-5 text-center">Tags List</h1>
 
-                @if (session('delete'))
+                @if (session('deleted'))
                     <div class="alert alert-danger">
-                        "{{ session('delete') }}" - has been removed successfully.
+                        "{{ session('deleted') }}" - has been removed successfully.
                     </div>
                 @elseif (session('created'))
                     <div class="alert alert-success">

@@ -30,6 +30,7 @@ class CategoriesTableSeeder extends Seeder
 
             $category = new Category();
             $category->name = ($categoryName);
+            
             $category->color = $faker->hexColor();
             $category->slug = Str::slug($categoryName, '-');
 

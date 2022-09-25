@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +30,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        $tag = Tag::all();
+        $tag = new Tag();
         return view('admin.tags.create', compact('tag'));
     }
 
@@ -38,7 +42,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('admin.tags.index');
+        $data = $request->all();
+
+        $request->validate([
+            'name' => 'required|unique:tags,name'
+        ]);
+        $tag = new Tag();
+        $tag->name = $data['name'];
+
+        $tag->save();
+        return redirect()->route('admin.tags.index')->with('created', $tag->title);
     }
 
     /**
@@ -61,7 +74,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::all();
+        $tag = Tag::findOrFail($id);
         return view('admin.tags.edit', compact('tag'));
     }
 
@@ -74,8 +87,19 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $tag = Tag::findOrfail($id);
-        return redirect()->route('admin.tags.show', compact('tag'));
+        $request->validate([
+            'name' => [
+                'required', 'unique:tags,name',
+                Rule::unique('tags')->ignore($tag->name, 'name')
+            ],
+        ]);
+
+        $tag->name = $request->all()['name'];
+
+        $tag->save();
+        return redirect()->route('admin.tags.index', compact('tag'))->with('created', $tag->title);
     }
 
     /**
@@ -86,10 +110,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
 
-        $tag->delete($id);
+        $tag->delete();
 
-        return redirect()->route('admin.tags.index')->with('delete', $tag->name);
+        return redirect()->route('admin.tags.show')->with('deleted', $tag->name);
     }
 }

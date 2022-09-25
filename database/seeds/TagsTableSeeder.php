@@ -21,9 +21,11 @@ class TagsTableSeeder extends Seeder
             'fixit',
         ];
 
-        foreach ($tags as $tag) {
+        foreach ($tags as $tagName) {
+
             $addTag = new Tag();
-            $addTag->name = $tag;
+            $addTag->name = ($tagName);
+            
             $addTag->save();
         }
     }
