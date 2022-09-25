@@ -92,8 +92,6 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
 
-        $data = $request->all();
-
         $category = Category::findOrFail($id);
 
         $request->validate([
@@ -103,10 +101,10 @@ class CategoryController extends Controller
             ],
         ]);
 
-        $category->update();
+        $category->name = $request->all()['name'];
+        $category->save();
 
-
-        return redirect()->route('admin.categories.index', compact('category'))->with('created',$category->name);
+        return redirect()->route('admin.categories.index')->with('created', $category->name);
     }
 
 
