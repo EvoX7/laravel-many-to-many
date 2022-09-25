@@ -42,7 +42,7 @@
                                 </td>
                                 <td>
                                     <form class="text-white" action="{{ route('admin.tags.destroy', $tag->id) }}"
-                                        method="tag">
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger font-weight-bold">Delete</button>

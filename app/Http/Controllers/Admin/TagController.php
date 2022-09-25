@@ -112,9 +112,7 @@ class TagController extends Controller
     public function destroy($id)
     {
         $tag = Tag::find($id);
-
-        $tag->delete();
-
+        $tag->delete($id);
         return redirect()->route('admin.tags.index')->with('deleted', $tag->name);
     }
 }
