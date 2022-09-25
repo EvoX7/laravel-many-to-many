@@ -16,8 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name',30)->unique();
-            $table->string('color');
-            $table->string('slug',50);
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }

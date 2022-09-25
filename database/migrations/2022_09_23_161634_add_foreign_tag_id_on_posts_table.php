@@ -17,7 +17,8 @@ class AddForeignTagIdOnPostsTable extends Migration
             $table->unsignedBigInteger('tag_id')->after('category_id')->nullable();
             $table->foreign('tag_id')
             ->references('id')
-            ->on('tags');
+            ->on('tags')
+            ->onDelete('cascade');
         });
     }
 

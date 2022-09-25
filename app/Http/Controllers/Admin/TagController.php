@@ -51,7 +51,8 @@ class TagController extends Controller
         $tag->name = $data['name'];
 
         $tag->save();
-        return redirect()->route('admin.tags.index')->with('created', $tag->title);
+
+        return redirect()->route('admin.tags.index')->with('created', $tag->name);
     }
 
     /**
@@ -99,7 +100,7 @@ class TagController extends Controller
         $tag->name = $request->all()['name'];
 
         $tag->save();
-        return redirect()->route('admin.tags.index', compact('tag'))->with('created', $tag->title);
+        return redirect()->route('admin.tags.index', compact('tag'))->with('created', $tag->name);
     }
 
     /**
@@ -110,10 +111,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $tag = Tag::findOrFail($id);
+        $tag = Tag::find($id);
 
         $tag->delete();
 
-        return redirect()->route('admin.tags.show')->with('deleted', $tag->name);
+        return redirect()->route('admin.tags.index')->with('deleted', $tag->name);
     }
 }

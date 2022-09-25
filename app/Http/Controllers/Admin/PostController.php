@@ -30,7 +30,7 @@ class PostController extends Controller
     {
 
         $posts = Post::where('user_id', Auth::id())->get();
-        return view('admin.posts.index', compact('posts',));
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -44,7 +44,8 @@ class PostController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         
-        return view('admin.posts.create', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
+        return view('admin.posts.create', compact('categories','tags', 'post'));
+        return redirect()->route('admin.posts.index')->with('created', $post->title);
     }
 
     /**
@@ -123,7 +124,7 @@ class PostController extends Controller
         $post->save();
         $post->tags()->sync($data['tags']);
 
-        return redirect()->route('admin.posts.show', $post->id)->with('created', $post->title);
+        return redirect()->route('admin.posts.show', compact('post'))->with('created', $post->title);
     }
 
     /**
@@ -138,6 +139,6 @@ class PostController extends Controller
 
         $post->delete($id);
 
-        return redirect()->route('admin.posts.index')->with('delete', $post->title);
+        return redirect()->route('admin.posts.index')->with('deleted', $post->title);
     }
 }

@@ -7,9 +7,9 @@
             <div class="col-12">
                 <h1 class="mt-3 mb-5 text-center">Category List</h1>
 
-                @if (session('delete'))
+                @if (session('deleted'))
                     <div class="alert alert-danger">
-                        "{{ session('delete') }}" - has been removed successfully.
+                        "{{ session('deleted') }}" - has been removed successfully.
                     </div>
                 @elseif (session('created'))
                     <div class="alert alert-success">
@@ -49,7 +49,7 @@
                                 </td>
                                 <td>
                                     <form class="text-white" action="{{ route('admin.categories.destroy', $category->id) }}"
-                                        method="category">
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger font-weight-bold">Delete</button>

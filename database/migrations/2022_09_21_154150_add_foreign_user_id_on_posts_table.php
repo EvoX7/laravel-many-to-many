@@ -17,7 +17,8 @@ class AddForeignUserIdOnPostsTable extends Migration
             $table->unsignedBigInteger('user_id')->after('id');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

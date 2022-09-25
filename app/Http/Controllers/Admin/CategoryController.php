@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -26,9 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        
-        $category = Category::all();
-        return view('admin.categories.create', compact('category'));
+        $categories = Category::all();
+        $category = new Category();
+        return view('admin.categories.create', compact('category', 'categories'));
     }
 
     /**
@@ -39,7 +40,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('admin.categories.index');
+
+        $data = $request->all();
+
+        $request->validate([
+            'name' => 'required|unique:categories,name'
+        ]);
+        $category = new Category();
+        $category->name = $data['name'];
+
+        $category->save();
+
+        return redirect()->route('admin.categories.index')->with('created', $category->name);
     }
 
     /**
@@ -65,8 +77,9 @@ class CategoryController extends Controller
     public function edit($id)
     {
 
-        $category = Category::all();
-        return view('admin.categories.edit', compact('category'));
+        $category = Category::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
     /**
@@ -79,9 +92,23 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
 
+        $data = $request->all();
+
         $category = Category::findOrFail($id);
-        return redirect()->route('admin.categories.show', compact('category'));
+
+        $request->validate([
+            'name' => [
+                'required', 'unique:categories,name',
+                Rule::unique('categories')->ignore($category->id)
+            ],
+        ]);
+
+        $category->update();
+
+
+        return redirect()->route('admin.categories.index', compact('category'))->with('created',$category->name);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -91,10 +118,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
-        $category->delete($id);
+        $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('delete', $category->name);
+        return redirect()->route('admin.categories.index')->with('deleted', $category->name);
     }
 }
