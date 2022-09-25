@@ -9,14 +9,18 @@
                 <h1 class="mt-3 mb-5 text-center">Tags List</h1>
 
                 @if (session('deleted'))
-                    <div class="alert alert-danger">
-                        "{{ session('deleted') }}" - has been removed successfully.
-                    </div>
-                @elseif (session('created'))
-                    <div class="alert alert-success">
-                        "{{ session('created') }}" - has been created successfully.
-                    </div>
-                @endif
+                <div class="alert alert-danger">
+                    "{{ session('deleted') }}" - has been removed successfully.
+                </div>
+            @elseif (session('created'))
+                <div class="alert alert-success">
+                    "{{ session('created') }}" - has been created successfully.
+                </div>
+            @elseif (session('updated'))
+                <div class="alert alert-warning">
+                    "{{ session('updated') }}" - has been updated successfully.
+                </div>
+            @endif
 
                 <a class="navbar-brand btn btn-success float-right mb-2" href="{{ route('admin.tags.create') }}">
                     New tag</a>

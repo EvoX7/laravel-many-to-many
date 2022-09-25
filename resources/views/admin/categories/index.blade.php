@@ -15,6 +15,10 @@
                     <div class="alert alert-success">
                         "{{ session('created') }}" - has been created successfully.
                     </div>
+                @elseif (session('updated'))
+                    <div class="alert alert-warning">
+                        "{{ session('updated') }}" - has been updated successfully.
+                    </div>
                 @endif
 
                 <a class="navbar-brand btn btn-success float-right mb-2" href="{{ route('admin.categories.create') }}">
@@ -48,8 +52,8 @@
                                         href="{{ route('admin.categories.edit', $category->id) }}">Edit</a>
                                 </td>
                                 <td>
-                                    <form class="text-white" action="{{ route('admin.categories.destroy', $category->id) }}"
-                                        method="POST">
+                                    <form class="text-white"
+                                        action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger font-weight-bold">Delete</button>

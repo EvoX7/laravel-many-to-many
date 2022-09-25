@@ -47,6 +47,7 @@ class CategoryController extends Controller
         ]);
         $category = new Category();
         $category->name = $data['name'];
+        $category->color = $data['color'];
 
         $category->save();
 
@@ -99,9 +100,10 @@ class CategoryController extends Controller
         ]);
 
         $category->name = $request->all()['name'];
+        $category->color = $request->all()['color'];
         $category->save();
 
-        return redirect()->route('admin.categories.index')->with('created', $category->name);
+        return redirect()->route('admin.categories.index')->with('updated', $category->name);
     }
 
 
