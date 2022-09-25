@@ -19,7 +19,10 @@ class PostController extends Controller
         'title' =>  'required|min:5|max:150',
         'post_img' => 'active_url',
         'post_content' => 'required|min:50',
-        'post_date' => 'required||date'
+        'post_date' => 'required||date',
+        'tags' => 'exists:tags,id',
+        'category_id' => 'nullable|exists:categories,id'
+        
     ];
     /**
      * Display a listing of the resource.
@@ -29,7 +32,7 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::where('user_id', Auth::id())->get();
+        $posts = Post::where('user_id', Auth::id())->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 

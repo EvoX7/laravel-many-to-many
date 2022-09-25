@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder
         $personalUser->save();
 
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->name = $faker->username();
             $user->email = $faker->email();

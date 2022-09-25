@@ -90,6 +90,7 @@ class TagController extends Controller
     {
 
         $tag = Tag::findOrfail($id);
+
         $request->validate([
             'name' => [
                 'required', 'unique:tags,name',
@@ -98,8 +99,8 @@ class TagController extends Controller
         ]);
 
         $tag->name = $request->all()['name'];
-
         $tag->save();
+
         return redirect()->route('admin.tags.index', compact('tag'))->with('created', $tag->name);
     }
 
@@ -112,7 +113,9 @@ class TagController extends Controller
     public function destroy($id)
     {
         $tag = Tag::find($id);
+
         $tag->delete($id);
+        
         return redirect()->route('admin.tags.index')->with('deleted', $tag->name);
     }
 }

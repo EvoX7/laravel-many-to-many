@@ -27,9 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
         $category = new Category();
-        return view('admin.categories.create', compact('category', 'categories'));
+        return view('admin.categories.create', compact('category'));
     }
 
     /**
@@ -63,7 +62,6 @@ class CategoryController extends Controller
     public function show($id)
 
     {
-
         $category = Category::findOrFail($id);
         return view('admin.categories.show', compact('category'));
     }
@@ -78,8 +76,7 @@ class CategoryController extends Controller
     {
 
         $category = Category::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.categories.edit', compact('category', 'categories'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
