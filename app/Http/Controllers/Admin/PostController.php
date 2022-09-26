@@ -15,10 +15,9 @@ class PostController extends Controller
     // Validation Rules
 
     protected $validationRules = [
-        'user_id' => 'required|min:5|max:150',
         'title' =>  'required|min:5|max:150',
-        'post_img' => 'active_url',
-        'post_content' => 'required|min:50',
+        'post_img' => 'url',
+        'post_content' => 'required|min:20',
         'post_date' => 'required||date',
         'tags' => 'exists:tags,id',
         'category_id' => 'nullable|exists:categories,id'
@@ -61,7 +60,7 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        // $validated = $request->validate($this->validationRules);
+        $validated = $request->validate($this->validationRules);
 
 
         $post = new Post();
@@ -115,7 +114,7 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        // $validated = $request->validate($this->validationRules);
+        $validated = $request->validate($this->validationRules);
         $post = Post::findOrfail($id);
 
         $post->user_id = Auth::user()->id;
