@@ -19,10 +19,10 @@ class PostController extends Controller
         'title' =>  'required|min:5|max:150',
         'post_img' => 'image',
         'post_content' => 'required|min:20',
-        'post_date' => 'required||date',
+        'post_date' => 'required|date',
         'tags' => 'exists:tags,id',
         'category_id' => 'nullable|exists:categories,id'
-        
+
     ];
     /**
      * Display a listing of the resource.
@@ -46,9 +46,8 @@ class PostController extends Controller
         $post = new Post();
         $categories = Category::all();
         $tags = Tag::all();
-        
-        return view('admin.posts.create', compact('categories','tags', 'post'));
-        return redirect()->route('admin.posts.index')->with('created', $post->title);
+
+        return view('admin.posts.create', compact('categories', 'tags', 'post'))->with('created', $post->title);
     }
 
     /**
@@ -75,7 +74,7 @@ class PostController extends Controller
         $post->save();
         $post->tags()->sync($data['tags']);
 
-       
+
 
         return redirect()->route('admin.posts.index')->with('created', $post->title);
     }

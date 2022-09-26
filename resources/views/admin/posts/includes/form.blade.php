@@ -43,7 +43,6 @@
 
 {{-- Tags --}}
 <div class="mb-3">
-
     @foreach ($tags as $tag)
         <div class="form-check">
 
@@ -59,6 +58,7 @@
         </div>
     @enderror
 </div>
+
 {{-- Post date --}}
 <div class="mb-3">
     <label for="post_date" class="form-label">Post date</label>

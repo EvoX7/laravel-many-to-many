@@ -41,9 +41,9 @@
                                         href="{{ route('admin.posts.show', $post->id) }}">{{ $post->title }}</a>
                                 </td>
                                 <td> <span class="badge badge-pill text-light w-75"
-                                        @if (isset($post->category)) style="background-color: {{ $post->category->color }} "> {{ $post->category->name }} 
+                                        @if (isset($post->category)) style="background-color: {{ $post->category->color }}"> {{ $post->category->name }} 
                                         @else 
-                                        style="background-color: grey"
+                                        style="background-color: grey">
                                         Unlisted 
                                         @endif
                                         </span>
