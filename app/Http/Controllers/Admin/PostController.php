@@ -61,7 +61,7 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        $validated = $request->validate($this->validationRules);
+        // $validated = $request->validate($this->validationRules);
 
 
         $post = new Post();
@@ -70,7 +70,7 @@ class PostController extends Controller
         $post->post_img = $data['post_img'];
         $post->post_content = $data['post_content'];
         $post->post_date = $data['post_date'];
-        $post->fill($data);
+        // $post->fill($data);
         $post->save();
         $post->tags()->sync($data['tags']);
 
@@ -115,7 +115,7 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        $validated = $request->validate($this->validationRules);
+        // $validated = $request->validate($this->validationRules);
         $post = Post::findOrfail($id);
 
         $post->user_id = Auth::user()->id;

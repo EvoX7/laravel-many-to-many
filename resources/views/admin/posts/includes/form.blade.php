@@ -11,10 +11,10 @@
 </div>
 {{-- Image URL --}}
 <div class="mb-3">
-    <label for="post_url" class="form-label">Image URL</label>
-    <input type="text" class="form-control" name="post_url" id="post_url"
-        value="{{ old('post_url', $post->post_img) }}">
-    @error('postURL')
+    <label for="post_img" class="form-label">Image URL</label>
+    <input type="text" class="form-control" name="post_img" id="post_img"
+        value="{{ old('post_img', $post->post_img) }}">
+    @error('post_img')
         <div class="alert alert-danger">
             {{ $message }}
         </div>
