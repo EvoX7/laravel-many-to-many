@@ -6,7 +6,7 @@
         <div class="card text-center pb-5">
             <div class="card-header py-5">
                 <h3 class="card-title font-weight-bold">{{ $post->title }}</h3>
-                <img class="w-50 rounded-4 py-4" src="{{ $post->post_img }}" alt="Image_url">
+                <img class="w-50 rounded-4 py-4" src="{{ asset('/storage') . '/' .  $post->post_img }}" alt="post_img">
                 <p>Category: <span class="badge badge-pill text-light"
                         @if (isset($post->category)) style="background-color: {{ $post->category->color }} "> {{ $post->category->name }} 
                     @else 

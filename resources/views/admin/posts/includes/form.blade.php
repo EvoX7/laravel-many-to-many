@@ -12,8 +12,7 @@
 {{-- Image URL --}}
 <div class="mb-3">
     <label for="post_img" class="form-label">Image URL</label>
-    <input type="text" class="form-control" name="post_img" id="post_img"
-        value="{{ old('post_img', $post->post_img) }}">
+    <input type="file" class="form-control" name="post_img" id="post_img" value="{{ old('post_image', $post->post_image) }}">
     @error('post_img')
         <div class="alert alert-danger">
             {{ $message }}
