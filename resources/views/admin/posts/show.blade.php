@@ -6,18 +6,24 @@
         <div class="card text-center pb-5">
             <div class="card-header py-5">
                 <h3 class="card-title font-weight-bold">{{ $post->title }}</h3>
-                <img class="w-50 rounded-4 py-4" src="{{ asset('/storage') . '/' .  $post->post_img }}" alt="post_img">
+
+                @if (filter_var($post->post_img, FILTER_VALIDATE_URL))
+                    <img class="w-50 rounded-4 py-4" src="{{ $post->post_img }}" alt="post_img">
+                @else
+                    <img class="w-50 rounded-4 py-4" src="{{ asset('/storage') . '/' . $post->post_img }}" alt="post_img">
+                @endif
+
+
                 <p>Category: <span class="badge badge-pill text-light"
-                    @if (isset($post->category)) style="background-color: {{ $post->category->color }}"> {{ $post->category->name }} 
+                        @if (isset($post->category)) style="background-color: {{ $post->category->color }}"> {{ $post->category->name }} 
                     @else 
                     style="background-color: grey">
-                    Unlisted 
-                    @endif
-                    </span>
+                    Unlisted @endif
+                        </span>
                 </p>
-                <p>tags: 
+                <p>tags:
                     @forelse ($post->tags as $tag)
-                    <strong>#{{ $tag->name }}</strong>
+                        <strong>#{{ $tag->name }}</strong>
                     @empty
                         No tags selected
                     @endforelse
